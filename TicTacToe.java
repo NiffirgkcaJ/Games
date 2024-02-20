@@ -31,6 +31,7 @@ public class TicTacToe {
             String result = winState();
             if(result.length() > 0){
                 System.out.println(result);
+                gameBoardPrint(gameBoard);
                 break;
             }
 
@@ -41,13 +42,13 @@ public class TicTacToe {
             }
             gamePlaceInput(gameBoard, computerRandomPosition, "Computer");
 
-            gameBoardPrint(gameBoard);
-
             result = winState();
             if(result.length() > 0){
                 System.out.println(result);
+                gameBoardPrint(gameBoard);
                 break;
             }
+            gameBoardPrint(gameBoard);
         }
     }
 
