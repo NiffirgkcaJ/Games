@@ -13,23 +13,23 @@ public class RockPaperScissors {
             while(true){
                 System.out.print("Please enter your move (R, P, or S): ");
                 playerMove = playerInput.nextLine().toLowerCase();
-    
+
                 if(playerMove.equals("r") || playerMove.equals("rock") || playerMove.equals("p") || playerMove.equals("paper") || playerMove.equals("s") || playerMove.equals("scissors")){
                     break;
                 }
                 System.out.println(playerMove + " is not a valid move.");
             }
             System.out.println("The computer chooses: " + computerMove + "!");
-    
-            if(playerMove.equals(computerMove)){
-                System.out.println("The game is a tie!");
-            }
-            else if(playerMove.equals("r") || playerMove.equals("rock")){
+
+            if(playerMove.equals("r") || playerMove.equals("rock")){
                 if(computerMove.equals("Paper")){
                     System.out.println("You lose!");
                 }
                 else if(computerMove.equals("Scissors")){
                     System.out.println("You win!");
+                }
+                else{
+                    System.out.println("The game is a tie!");
                 }
             }
             else if(playerMove.equals("p") || playerMove.equals("paper")){
@@ -39,6 +39,9 @@ public class RockPaperScissors {
                 else if(computerMove.equals("Rock")){
                     System.out.println("You win!");
                 }
+                else{
+                    System.out.println("The game is a tie!");
+                }
             }
             else if(playerMove.equals("s") || playerMove.equals("scissors")){
                 if(computerMove.equals("Rock")){
@@ -46,6 +49,9 @@ public class RockPaperScissors {
                 }
                 else if(computerMove.equals("Paper")){
                     System.out.println("You win!");
+                }
+                else{
+                    System.out.println("The game is a tie!");
                 }
             }
 
