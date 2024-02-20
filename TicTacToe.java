@@ -22,8 +22,8 @@ public class TicTacToe {
             Scanner gameInput = new Scanner(System.in);
             System.out.print("\nPlease enter the number of the area. (1-9):");
             int gameInputPosition = gameInput.nextInt();
-            while(playerPositions.contains(gameInputPosition) || computerPositions.contains(playerPositions)){
-                System.out.print("Position taken! Please enter a blank position!");
+            while(playerPositions.contains(gameInputPosition) || computerPositions.contains(gameInputPosition)){
+                System.out.print("Position taken! Please enter a blank position: ");
                 gameInputPosition = gameInput.nextInt();
             }
             gamePlaceInput(gameBoard, gameInputPosition, "Player");
