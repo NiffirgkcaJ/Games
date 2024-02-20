@@ -1,7 +1,7 @@
 import java.util.Random;
 import java.util.Scanner;
 
-public class RockPaperScissors {
+public class RockPaperScissors{
     public static void main(String[] args){
         String[] rps = {"Rock", "Paper", "Scissors"};
         String computerMove = rps[new Random().nextInt(rps.length)];
