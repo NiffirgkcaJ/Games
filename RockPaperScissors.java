@@ -40,7 +40,7 @@ public class RockPaperScissors {
                     System.out.println("You win!");
                 }
             }
-            else if(playerMove.equals("s") || playerMove.equals("scissor")){
+            else if(playerMove.equals("s") || playerMove.equals("scissors")){
                 if(computerMove.equals("Rock")){
                     System.out.println("You lose!");
                 }
