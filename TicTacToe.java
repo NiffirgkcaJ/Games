@@ -135,8 +135,6 @@ public class TicTacToe {
             else if(playerPositions.size() + computerPositions.size() == 9){
                 return "It's a tie!";
             }
-            else;
-                return "Error!";
         }
         return "";
     }
