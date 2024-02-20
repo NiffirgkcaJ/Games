@@ -20,7 +20,7 @@ public class TicTacToe {
 
         while(true){
             Scanner gameInput = new Scanner(System.in);
-            System.out.print("\nPlease enter the number of the area. (1-9):");
+            System.out.print("\nPlease enter the number of the area. (1-9): ");
             int gameInputPosition = gameInput.nextInt();
             while(playerPositions.contains(gameInputPosition) || computerPositions.contains(gameInputPosition)){
                 System.out.print("Position taken! Please enter a blank position: ");
@@ -135,6 +135,8 @@ public class TicTacToe {
             else if(playerPositions.size() + computerPositions.size() == 9){
                 return "It's a tie!";
             }
+            else;
+                return "Error!";
         }
         return "";
     }
