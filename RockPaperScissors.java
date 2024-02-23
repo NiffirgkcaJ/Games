@@ -88,7 +88,7 @@ public class RockPaperScissors{
             System.out.print("Please enter your move (R, P, or S): ");
             playerMove = playerInput.nextLine().toLowerCase();
     
-            if(playerMove.equals("r") || playerMove.equals("rock") || playerMove.equals("p") || playerMove.equals("paper") || playerMove.equals("s") || playerMove.equals("scissors")) {
+            if(playerMove.equals("r") || playerMove.equals("rock") || playerMove.equals("p") || playerMove.equals("paper") || playerMove.equals("s") || playerMove.equals("scissors")){
                 break;
             }
             else{
