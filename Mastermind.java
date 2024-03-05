@@ -69,7 +69,7 @@ public class Mastermind{
             }
 
             char[] guess = input.toCharArray();
-    
+
             if(isValidGuess(guess)){
                 return guess; // Return valid guess
             }
