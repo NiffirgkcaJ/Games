@@ -18,6 +18,10 @@ public class Mastermind{
                 System.out.print("\nTurn " + turn + "/" + MAX_TURNS + ": Enter your guess (e.g., RGBY):");
                 char[] guess = getInputWithValidation(scanner);
 
+                if(guess == null){ // Check for null returned by invalid input
+                    continue; // Skip to the next turn if invalid
+                }
+
                 if(checkCorrect(secretCode, guess)){
                     System.out.println("Congratulations! You guessed the correct code.");
                     break;
@@ -28,7 +32,7 @@ public class Mastermind{
                 }
 
                 if(turn == MAX_TURNS){
-                    System.out.println("Sorry, you've run out of turns. The secret code was: " + Arrays.toString(secretCode));
+                    System.out.println("\nSorry, you've run out of turns. The secret code was: " + Arrays.toString(secretCode));
                 }
             }
 
@@ -42,7 +46,7 @@ public class Mastermind{
                     break;
                 }
                 else if(confirm.equals("n") || confirm.equals("no")){
-                    System.out.println("Thank you for playing Mastermind!");
+                    System.out.println("\nThank you for playing Mastermind!\n");
                     playAgain = false;
                     break;
                 }
@@ -51,10 +55,10 @@ public class Mastermind{
                     continue;
                 }
             }
-        }   
+        }
     }
 
-    // New method to validate input
+    // New method to validate input with breaking on invalid characters
     private static char[] getInputWithValidation(Scanner scanner){
         while(true){
             String input = scanner.nextLine().trim().toUpperCase();
@@ -69,8 +73,10 @@ public class Mastermind{
             }
             else{
                 System.out.println("Invalid guess. Please use only the allowed colors: " + Arrays.toString(COLORS));
+                break; // Break out if invalid characters are found
             }
         }
+        return null; // Return null for invalid input
     }
 
     private static boolean isValidGuess(char[] guess){
