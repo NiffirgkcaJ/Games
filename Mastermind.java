@@ -3,7 +3,7 @@ import java.util.*;
 public class Mastermind{
     private static final int CODE_LENGTH = 4;
     private static final int MAX_TURNS = 10;
-    private static final char[] COLORS = {'R', 'B', 'G', 'Y', 'O', 'P'};
+    private static final char[] COLORS = {'R', 'O', 'Y', 'G', 'B', 'P'};
 
     public static void main(String[] args){
         Scanner scanner = new Scanner(System.in);
@@ -12,7 +12,7 @@ public class Mastermind{
         boolean playAgain = true;
         while(playAgain){
             char[] secretCode = generateSecretCode(random);
-            System.out.println("Welcome to Mastermind! Try to guess the secret code.");
+            System.out.println("Welcome to Mastermind! Try to guess the secret code. The colours are as follows:\nR for Red, O for Orange, Y for Yellow, G for Green, B for Blue, or P for Purple.");
 
             for(int turn = 1; turn <= MAX_TURNS; turn++){
                 System.out.print("\nTurn " + turn + "/" + MAX_TURNS + ": Enter your guess (e.g., RGBY):");
