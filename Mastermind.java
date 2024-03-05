@@ -12,26 +12,24 @@ public class Mastermind{
         boolean playAgain = true;
         while(playAgain){
             char[] secretCode = generateSecretCode(random);
-            System.out.println("Welcome to Mastermind! Try to guess the secret code. The colours are as follows:\nR for Red, O for Orange, Y for Yellow, G for Green, B for Blue, or P for Purple.");
+            System.out.println("\nWelcome to Mastermind! Try to guess the secret code. The colours are as follows:\nR for Red, O for Orange, Y for Yellow, G for Green, B for Blue, or P for Purple.");
 
-            for(int turn = 1; turn <= MAX_TURNS; turn++){
-                System.out.print("\nTurn " + turn + "/" + MAX_TURNS + ": Enter your guess (e.g., RGBY):");
-                char[] guess = getInputWithValidation(scanner);
+            for (int turn = 1; turn <= MAX_TURNS;){
+                char[] guess = getInputWithValidation(scanner, turn); // Pass "turn"
 
-                if(guess == null){ // Check for null returned by invalid input
-                    continue; // Skip to the next turn if invalid
+                if (guess != null){ // Check for valid input before incrementing turn
+                    if (checkCorrect(secretCode, guess)){
+                        System.out.println("Congratulations! You guessed the correct code.");
+                        break;
+                    }
+                    else{
+                        int[] feedback = generateFeedback(secretCode, guess);
+                        System.out.println("Feedback: " + feedback[0] + " black peg(s) and " + feedback[1] + " white peg(s)");
+                        turn++; // Increment turn only after valid guess
+                    }
                 }
 
-                if(checkCorrect(secretCode, guess)){
-                    System.out.println("Congratulations! You guessed the correct code.");
-                    break;
-                }
-                else{
-                    int[] feedback = generateFeedback(secretCode, guess);
-                    System.out.println("Feedback: " + feedback[0] + " black peg(s) and " + feedback[1] + " white peg(s)");
-                }
-
-                if(turn == MAX_TURNS){
+                if (turn > MAX_TURNS){
                     System.out.println("\nSorry, you've run out of turns. The secret code was: " + Arrays.toString(secretCode));
                 }
             }
@@ -59,24 +57,26 @@ public class Mastermind{
     }
 
     // New method to validate input with breaking on invalid characters
-    private static char[] getInputWithValidation(Scanner scanner){
+    private static char[] getInputWithValidation(Scanner scanner, int turn){
         while(true){
+            // Print prompt before the loop
+            System.out.print("\nTurn " + turn + "/" + MAX_TURNS + ": Enter your guess (e.g., RGBY): ");
             String input = scanner.nextLine().trim().toUpperCase();
+
             if(input.length() != CODE_LENGTH){
                 System.out.println("Invalid guess. Please enter exactly " + CODE_LENGTH + " letters.");
-                continue;
+                continue; // Start the next loop iteration
             }
 
             char[] guess = input.toCharArray();
+    
             if(isValidGuess(guess)){
-                return guess;
+                return guess; // Return valid guess
             }
             else{
                 System.out.println("Invalid guess. Please use only the allowed colors: " + Arrays.toString(COLORS));
-                break; // Break out if invalid characters are found
             }
         }
-        return null; // Return null for invalid input
     }
 
     private static boolean isValidGuess(char[] guess){
