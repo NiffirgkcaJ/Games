@@ -4,7 +4,7 @@ import java.util.InputMismatchException;
 import java.util.Random;
 import java.util.Scanner;
 
-public class Mastermind{
+public class MastermindV2{
     // Define the possible characters for the secret code
     private static final char[] CHARACTERS = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9'};
 
@@ -66,7 +66,7 @@ public class Mastermind{
                 else{
                     // Provide feedback on the guess
                     int[] feedback = generateFeedback(secretCode, guess);
-                    System.out.println("You have found: " + feedback[0] + " correct character(s) and " + feedback[1] + " nearly correct character(s)");
+                    System.out.println("You have found: " + feedback[0] + " correct character(s) and " + feedback[1] + " nearly correct character(s).");
                 }
             }
 
