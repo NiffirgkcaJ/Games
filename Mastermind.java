@@ -4,7 +4,7 @@ import java.util.InputMismatchException;
 import java.util.Random;
 import java.util.Scanner;
 
-public class Mastermind{
+public class Mastermind2{
     // Define the possible characters for the secret code
     private static final char[] CHARACTERS = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9'};
 
@@ -139,7 +139,7 @@ public class Mastermind{
             try{
                 int codeLength = inputCodeLength.nextInt();
                 inputCodeLength.nextLine(); // Consume newline character
-    
+
                 if(codeLength > 0){
                     return codeLength;
                 }
