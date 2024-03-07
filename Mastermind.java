@@ -5,7 +5,7 @@ import java.util.InputMismatchException;
 import java.util.Random;
 import java.util.Scanner;
 
-public class Mastermind{
+public class MastermindV2{
     // Define the possible characters for the secret code
     private static final char[] CHARACTERS = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9'};
 
@@ -22,6 +22,7 @@ public class Mastermind{
             // Select the game difficulty and code length
             int currentDifficulty = selectDifficulty(scanner, true);
             int currentCodeLength = selectCodeLength(scanner, true);
+            clearScreen(); // Call clearScreen
 
             // Set the maximum number of turns and the code length based on user input
             MAX_TURNS = getGameMode(currentDifficulty);
@@ -73,6 +74,7 @@ public class Mastermind{
 
             // Print the secret code based on the game state
             if(!isGameOver && turn > MAX_TURNS){ // Check if the game ended due to exhausting all turns
+                clearScreen(); // Call clearScreen
                 System.out.println("\nSorry, you've run out of turns. The secret code is: " + Arrays.toString(secretCode));
             }
 
