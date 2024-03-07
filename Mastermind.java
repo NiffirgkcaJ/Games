@@ -1,10 +1,11 @@
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.InputMismatchException;
 import java.util.Random;
 import java.util.Scanner;
 
-public class MastermindV2{
+public class Mastermind{
     // Define the possible characters for the secret code
     private static final char[] CHARACTERS = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9'};
 
@@ -12,7 +13,7 @@ public class MastermindV2{
     private static int MAX_TURNS;
     private static int CODE_LENGTH;
 
-    public static void main(String[] args){
+    public static void main(String[] args) throws IOException{
         Scanner scanner = new Scanner(System.in);
         Random random = new Random();
 
@@ -81,19 +82,69 @@ public class MastermindV2{
                 String confirm = scanner.nextLine().toLowerCase();
 
                 if(confirm.equals("y") || confirm.equals("yes")){
+                    // Clear the terminal after user input
+                    try{
+                        clearScreen(); // Call clearScreen within a try-catch block
+                    }
+                    catch(IOException exception){
+                        System.err.println("Error clearing screen: " + exception.getMessage());
+                    }
                     break;
                 }
                 else if(confirm.equals("n") || confirm.equals("no")){
+                    // Clear the terminal after user input
+                    try{
+                        clearScreen(); // Call clearScreen within a try-catch block
+                    }
+                    catch(IOException exception){
+                        System.err.println("Error clearing screen: " + exception.getMessage());
+                    }
                     System.out.println("\nThank you for playing Mastermind!\n");
                     playAgain = false;
                     break;
                 }
                 else{
+                    // Clear the terminal after user input
+                    try{
+                        clearScreen(); // Call clearScreen within a try-catch block
+                    }
+                    catch(IOException exception){
+                        System.err.println("Error clearing screen: " + exception.getMessage());
+                    }
                     System.out.println("Error!");
                 }
             }
         }
         scanner.close(); // Close the scanner to release system resources
+    }
+
+    // Method to clear the terminal after the user has entered an input
+    public static void clearScreen() throws IOException{
+        String osName = System.getProperty("os.name").toLowerCase();
+        if(osName.contains("win")){
+            try{
+                new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+            }
+            catch(InterruptedException exception){
+                Thread.currentThread().interrupt(); // Preserve interrupted status
+                exception.printStackTrace();
+            }
+        }
+        else{
+            // Use platform-specific commands for portability
+            if(osName.contains("linux") || osName.contains("mac")){
+                try{
+                    Runtime.getRuntime().exec("clear").waitFor(); // Still acceptable on Linux/macOS
+                }
+                catch(InterruptedException exception){
+                    Thread.currentThread().interrupt(); // Preserve interrupted status
+                    exception.printStackTrace();
+                }
+            }
+            else{
+                throw new UnsupportedOperationException("Clearing the terminal not supported on your OS");
+            }
+        }
     }
 
     // Method to determine the maximum number of turns based on the selected difficulty
@@ -180,10 +231,10 @@ public class MastermindV2{
 
     // Method to check if the guess is valid
     private static boolean isValidGuess(char[] guess){
-        for(char c : guess){
+        for(char character : guess){
             boolean isValid = false;
-            for(char color : CHARACTERS){
-                if(c == color){
+            for(char characterCode : CHARACTERS){
+                if(character == characterCode){
                     isValid = true;
                     break;
                 }
@@ -224,9 +275,9 @@ public class MastermindV2{
         int whitePegs = 0;
         boolean[] checkedGuess = new boolean[CODE_LENGTH];
 
-        HashMap<Character, Integer> secretColorCounts = new HashMap<>();
-        for(char color : secretCode){
-            secretColorCounts.put(color, secretColorCounts.getOrDefault(color, 0) + 1);
+        HashMap<Character, Integer> secretCharacterCounts = new HashMap<>();
+        for(char characterCode : secretCode){
+            secretCharacterCounts.put(characterCode, secretCharacterCounts.getOrDefault(characterCode, 0) + 1);
         }
 
         for(int i = 0; i < CODE_LENGTH; i++){
@@ -239,9 +290,9 @@ public class MastermindV2{
         for(int i = 0; i < CODE_LENGTH; i++){
             if(!checkedGuess[i]){
                 for(int j = 0; j < CODE_LENGTH; j++){
-                    if (guess[i] == secretCode[j] && !checkedGuess[j] && secretColorCounts.get(guess[i]) > 0){
+                    if (guess[i] == secretCode[j] && !checkedGuess[j] && secretCharacterCounts.get(guess[i]) > 0){
                         whitePegs++;
-                        secretColorCounts.put(guess[i], secretColorCounts.get(guess[i]) - 1);
+                        secretCharacterCounts.put(guess[i], secretCharacterCounts.get(guess[i]) - 1);
                         checkedGuess[i] = true;
                         break;
                     }
